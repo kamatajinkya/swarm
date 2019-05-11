@@ -1,0 +1,4 @@
+/home/ajinkya/Install/clion-2018.2.5/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/ajinkya/CLionProjects/swarm
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ajinkya/CLionProjects/swarm/cmake-build-debug
