@@ -25,6 +25,7 @@ int main() {
   xbee_init_status xbeeInitStatus = xbee_init(xbeeInitConfig);
   if (xbeeInitStatus != XBEE_INIT_SUCCESSFUL) {
     DEVICE_LOG_ERROR("Xbee Init Failed with code : %d", xbeeInitStatus);
+    return -1;
   }
 
   device_sleep_ms(100);
@@ -39,14 +40,19 @@ int main() {
 
   COMMON_CREATE_STRING(frame, 100);
   COMMON_CREATE_STRING(payload, 150);
-  common_string_copy_from_null_terminated_string(&payload, "Hello World!!!");
+
+  if(!common_string_copy_from_null_terminated_string(&payload, "Hello World!!!"))
+  {
+    DEVICE_LOG_ERROR("Could not initialize string - payload");
+    return -1;
+  }
 
   unsigned char frameId;
 
   device_status deviceStatus;
   while (1) {
     deviceStatus = device_get_status();
-    if (deviceStatus != DEVICE_STATUS_OK) {
+    if (deviceStatus < DEVICE_STATUS_OK) {
       DEVICE_LOG_ERROR("Device Failed with code %d", deviceStatus);
       return -1;
     }
