@@ -1,5 +1,6 @@
 //
 // Created by ajinkya on 5/11/19.
+// Handles device specific configuration
 //
 
 #ifndef SWARM_DEVICE_H

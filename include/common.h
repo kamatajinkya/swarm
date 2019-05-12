@@ -1,3 +1,9 @@
+//
+// Created by ajinkya on 5/11/19.
+// Common utility functions
+//
+
+
 #ifndef SWARM_COMMON_H
 #define SWARM_COMMON_H
 #include <stdbool.h>
