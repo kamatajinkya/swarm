@@ -1,3 +1,8 @@
+//
+// Created by ajinkya on 5/11/19.
+// main file application starts here
+//
+
 #include <stdio.h>
 #include "xbee.h"
 #include "device.h"
