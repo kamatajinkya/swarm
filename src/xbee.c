@@ -117,6 +117,7 @@ xbee_create_transmit_request(const unsigned char destinationMacID[XBEE_MAC_ID_SI
                 - XBEE_TRANSMIT_REQUEST_FRAME_HEADER_DELIIMITER_SIZE
                 - XBEE_TRANSMIT_REQUEST_FRAME_HEADER_LENGTH_SIZE) + payloadSize;
 
+  /* Converting to bigendien to make sure portability */
   device_convert_number_to_bigendien((char*)&length,
                                      XBEE_TRANSMIT_REQUEST_FRAME_HEADER_LENGTH_SIZE,
                                      (char*)(&formattedMsg->length));
