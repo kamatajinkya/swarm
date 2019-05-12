@@ -8,4 +8,4 @@ set(DEVICE_TYPE_x86_TEST 2)
 set(DEVICE_TYPE DEVICE_TYPE_x86)
 
 include_directories(include)
-add_executable(swarm main.c src/common.c src/xbee.c src/device.c)
+add_executable(swarm src/main.c src/common.c src/xbee.c src/device.c)

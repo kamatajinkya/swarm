@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "include/xbee.h"
+#include "xbee.h"
 #include "device.h"
 
 int main() {
