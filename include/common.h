@@ -15,8 +15,9 @@ typedef struct{
   unsigned char* const data;
 }common_string;
 
+
 /// Used to supress unused warning for intentionally unused variables
-#define UNUSED(x) (void)(x)
+#define COMMON_UNUSED(x) (void)(x)
 
 /// Compares char arrays. Returns true if same false different
 /// \param[IN] arr1 First array

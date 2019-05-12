@@ -15,7 +15,7 @@
 
 device_init_status device_init(device_init_config config)
 {
-  UNUSED(config.baudrate);
+  COMMON_UNUSED(config.baudrate);
   return DEVICE_INIT_SUCCESSFUL;
 }
 
