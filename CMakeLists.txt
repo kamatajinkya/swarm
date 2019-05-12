@@ -3,9 +3,24 @@ project(swarm)
 
 set(CMAKE_C_STANDARD 99)
 
-set(DEVICE_TYPE_x86 1)
-set(DEVICE_TYPE_x86_TEST 2)
-set(DEVICE_TYPE DEVICE_TYPE_x86)
+#platform information
+set(DEVICE_TYPE_x86 "1")
+
+#select platform
+set(DEVICE_TYPE ${DEVICE_TYPE_x86})
+set(TEST_MODE ON)
+
+#test mode specific configurations
+if (${TEST_MODE})
+ add_definitions(-DDEVICE_TEST_MODE)
+endif ()
+
+set(EXECUTABLES src/main.c src/common.c src/xbee.c)
+
+#x86 specific configurations
+if(${DEVICE_TYPE} MATCHES ${DEVICE_TYPE_x86})
+ list(APPEND EXECUTABLES src/device_x86.c)
+endif()
 
 include_directories(include)
-add_executable(swarm src/main.c src/common.c src/xbee.c src/device.c)
+add_executable(swarm ${EXECUTABLES})

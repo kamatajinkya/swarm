@@ -1,3 +1,9 @@
+//
+// Created by ajinkya on 5/11/19.
+// This implements decive.h functions for x86 processors
+// Use this file as template to implement
+//
+
 #include "device.h"
 
 #include <unistd.h>
@@ -6,7 +12,6 @@
 
 #include "common.h"
 
-#if DEVICE_TYPE == DEVICE_TYPE_x86 || DEVICE_TYPE == DEVICE_TYPE_x86_TEST
 
 device_init_status device_init(unsigned long baudrate)
 {
@@ -57,15 +62,21 @@ void device_convert_number_to_bigendien(const char* in, long sizeInBytes, char* 
   }
 }
 
+#ifdef DEVICE_TEST_MODE
 void device_serial_send(const char* data, int size)
 {
-  //Todo: Implement sending via Termial
-
   DEVICE_LOG_INFO("Data Stream : \r\n");
   for (int i = 0; i < size; ++i) {
     printf("%hhX ", data[i]);
   }
   printf("\r\n");
 }
+#endif
 
+#ifndef DEVICE_TEST_MODE
+void device_serial_send(const char* data, int size)
+{
+  //Todo: Implement this
+  #error "Not implemented yet"
+}
 #endif
