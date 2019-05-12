@@ -3,6 +3,7 @@
 //
 
 #include "common.h"
+#include "string.h"
 
 bool common_compare_char_arrays(const unsigned char* arr1, const unsigned char* arr2, int size)
 {
@@ -27,4 +28,20 @@ bool common_copy_char_array(const unsigned char* source, unsigned char* destinat
   {
     destination[i] = source[i];
   }
+}
+
+bool common_string_copy_from_null_terminated_string(common_string* string,
+                                                    const char* nullTerminatedString)
+{
+  string->size = 0;
+  while(nullTerminatedString[string->size] != '\0')
+  {
+    if(string->size >= string->maxSize)
+      return false;
+
+    string->data[string->size] = (unsigned char)nullTerminatedString[string->size];
+    string->size++;
+  }
+
+  return true;
 }

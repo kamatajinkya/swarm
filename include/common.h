@@ -8,14 +8,6 @@
 #define SWARM_COMMON_H
 #include <stdbool.h>
 
-//Todo: Implement checks for overflow
-typedef struct{
-  int size;
-  const int maxSize;
-  unsigned char* const data;
-}common_string;
-
-
 /// Used to supress unused warning for intentionally unused variables
 #define COMMON_UNUSED(x) (void)(x)
 
@@ -35,5 +27,29 @@ bool common_set_char_array_to_zero(unsigned char* array, int size);
 /// \param[IN] destination Second array
 /// \param[IN] size Size of both the arrays
 bool common_copy_char_array(const unsigned char* source, unsigned char* destination, int size);
+
+typedef struct{
+  int size;
+  const int maxSize;
+  unsigned char* const data;
+}common_string;
+/// Creates a string with name NAME and buffer max size of MAX_SIZE
+/// Also creates a buffer with  name NAMEbuffer to store actual string data
+/// e.g. COMMON_CREATE_STRING(example, 100) will create a string named example
+///      and unsigned char array named exampleBuffer of size 100.
+#define COMMON_CREATE_STRING(NAME, MAX_SIZE) \
+  unsigned char NAME##Buffer[MAX_SIZE]; \
+  common_string NAME = {      \
+      .maxSize = MAX_SIZE,    \
+      .data = NAME##Buffer    \
+  }
+
+/// Copies value from null terminated string to common_string.
+/// Returns false if copy could not be completed
+/// \param[out] string Destination of copy
+/// \param[in] nullTerminatedString String to be copies
+bool common_string_copy_from_null_terminated_string(common_string* string,
+                    const char* nullTerminatedString);
+
 
 #endif //SWARM_COMMON_H

@@ -37,18 +37,9 @@ int main() {
   int deviceIndex;
   xbee_add_network_addr_mac_id_pair(xbee, &deviceIndex);
 
-  unsigned char frameDataBuffer[100];
-  common_string frame = {
-      .maxSize = 100,
-      .data = frameDataBuffer
-  };
-
-  unsigned char payloadDataBuffer[150] = {"Hello World!!!"};
-  common_string payload = {
-      .size = 14,
-      .maxSize = 150,
-      .data = payloadDataBuffer
-  };
+  COMMON_CREATE_STRING(frame, 100);
+  COMMON_CREATE_STRING(payload, 150);
+  common_string_copy_from_null_terminated_string(&payload, "Hello World!!!");
 
   unsigned char frameId;
 
