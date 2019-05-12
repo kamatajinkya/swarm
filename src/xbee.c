@@ -63,7 +63,7 @@ bool xbee_get_network_addr_from_mac_id(const unsigned char* macID,
   return false;
 }
 
-bool xbee_add_network_addr_from_mac_pair(const xbee_mac_id_network_addr_pair pair, int* index)
+bool xbee_add_network_addr_mac_id_pair(const xbee_mac_id_network_addr_pair pair, int *index)
 {
   int i=0;
   while(mod.isAddressListPositionOccupied[i] && i < XBEE_STORED_ADDR_LIST_SIZE) i++;

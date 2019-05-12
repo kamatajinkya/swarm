@@ -30,12 +30,13 @@ int main() {
 
   device_sleep_ms(100);
 
-  xbee_mac_id_network_addr_pair device = {
+  xbee_mac_id_network_addr_pair xbee = {
       .destinationNetworkAddr = {0xFF, 0xFE},
-      .destinationMacID = {0x00, 0x13, 0xA2, 0x00, 0x40, 0xA2, 0x09, 0xA3}};
+      .destinationMacID = {0x00, 0x13, 0xA2, 0x00, 0x40, 0xA2, 0x09, 0xA3}
+  };
 
   int deviceIndex;
-  xbee_add_network_addr_from_mac_pair(device, &deviceIndex);
+  xbee_add_network_addr_mac_id_pair(xbee, &deviceIndex);
 
   unsigned char frame[500];
   int size;
@@ -49,7 +50,7 @@ int main() {
     }
 
     xbee_create_transmit_request_status createTransmitRequestStatus
-        = xbee_create_transmit_request(device.destinationMacID, "Hello World", frame, &size);
+        = xbee_create_transmit_request(xbee.destinationMacID, "Hello World!!!", frame, &size);
 
     if (createTransmitRequestStatus != XBEE_CREATE_TRANMIT_REQUEST_SUCCESSFUL) {
       DEVICE_LOG_ERROR("Could not create transmit request", deviceStatus);

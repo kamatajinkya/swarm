@@ -62,7 +62,7 @@ typedef struct {
 /// Returns false if list is full
 /// \param[IN] pair Pair of network Address and Machine ID to be stored
 /// \param[OUT] index Index for future reference
-bool xbee_add_network_addr_from_mac_pair(const xbee_mac_id_network_addr_pair pair, int* index);
+bool xbee_add_network_addr_mac_id_pair(const xbee_mac_id_network_addr_pair pair, int *index);
 
 /// Removes xbee_mac_id_network_addr_pair from the list
 /// \param[IN] index Index of pair to be removed.
