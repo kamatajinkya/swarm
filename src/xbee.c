@@ -64,7 +64,7 @@ bool xbee_add_network_addr_from_mac_pair(const xbee_mac_id_network_addr_pair pai
   while(mod.isAddressListPositionOccupied[i] && i < XBEE_STORED_ADDR_LIST_SIZE) i++;
   if(i == XBEE_STORED_ADDR_LIST_SIZE)
   {
-    device_print_debug("Xbee Address space full");
+    DEVICE_LOG_ERROR("Xbee Address space full");
     return false;
   }
 
@@ -123,14 +123,14 @@ xbee_create_transmit_request(const unsigned char destinationMacID[XBEE_MAC_ID_SI
 
   if(!xbee_get_network_addr_from_mac_id(destinationMacID, formattedMsg->destinationNetworkAddr))
   {
-    device_print_debug("Could not find network id");
+    DEVICE_LOG_ERROR("Could not find network id");
     return XBEE_CREATE_TRANMIT_REQUEST_COULD_NOT_FIND_NETWORK_ID;
   }
 
   common_copy_char_array(payload, (frame + XBEE_TRANSMIT_REQUEST_FRAME_HEADER_SIZE), payloadSize);
   frame[XBEE_TRANSMIT_REQUEST_FRAME_HEADER_SIZE + payloadSize]
       = xbee_calculate_checksum(&formattedMsg->apiFrameFormat, length);
-  *size = XBEE_TRANSMIT_REQUEST_FRAME_HEADER_SIZE + payloadSize + 1;
+  *size = XBEE_TRANSMIT_REQUEST_FRAME_HEADER_SIZE + payloadSize;
 
   return XBEE_CREATE_TRANMIT_REQUEST_SUCCESSFUL;
 }

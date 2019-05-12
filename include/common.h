@@ -1,3 +1,5 @@
+#ifndef SWARM_COMMON_H
+#define SWARM_COMMON_H
 #include <stdbool.h>
 
 /// Used to supress unused warning for intentionally unused variables
@@ -19,4 +21,5 @@ bool common_set_char_array_to_zero(unsigned char* array, int size);
 /// \param[IN] destination Second array
 /// \param[IN] size Size of both the arrays
 bool common_copy_char_array(const unsigned char* source, unsigned char* destination, int size);
+
 #endif //SWARM_COMMON_H

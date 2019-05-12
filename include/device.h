@@ -31,7 +31,23 @@ typedef enum{
 /// Prints debug statement to console. Do not use this function use the macros DEVICE_LOG_ERROR()
 /// or DEVICE_LOG_INFO()
 /// \param[in] format message to be printed in printf like format
-void device_print_debug(device_log_level level ,const char* format, ...);
-#define DEVICE_LOG_ERROR(x) device_print_debug(x);
+void device_print_debug(device_log_level level , const char* file, int line, const char* format, ...);
+#define DEVICE_LOG_ERROR(...) device_print_debug(DEVICE_LOG_LEVEL_ERROR, \
+                                               __FILE__,__LINE__,           \
+                                               __VA_ARGS__);
+#define DEVICE_LOG_INFO(...) device_print_debug(DEVICE_LOG_LEVEL_INFO,   \
+                                               __FILE__,__LINE__,           \
+                                               __VA_ARGS__);
+
+/// Converts number to big endien format ie LSB first and MSB last
+/// \param[in] in Input number in little endien format
+/// \param[in] sizeInBytes Size of number in bytes
+/// \param[out] out Output number in bigendien format
+void device_convert_number_to_bigendien(const char* in, long sizeInBytes, char* out);
+
+/// Sends data via serial port
+/// \param[in] data Data to be sent
+/// \param[in] size Size of array of data
+void device_serial_send(const char* data, int size);
 
 #endif //SWARM_DEVICE_H

@@ -1,3 +1,6 @@
+#ifndef SWARM_XBEE_H
+#define SWARM_XBEE_H
+
 #include <stdbool.h>
 
 #define XBEE_MAC_ID_SIZE 8

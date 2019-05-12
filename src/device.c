@@ -31,13 +31,21 @@ device_status device_get_status()
   return DEVICE_STATUS_OK;
 }
 
-void device_print_debug(const char* format, ...)
+/// Converts log level to string for human readable output
+/// \param[in] level Level of log
+static char* device_convert_log_level_to_string(device_log_level level)
+{
+  if(level == DEVICE_LOG_LEVEL_ERROR) return "ERROR";
+  if(level == DEVICE_LOG_LEVEL_INFO) return "INFO";
+}
+
+void device_print_debug(device_log_level level , const char* file, int line, const char* format, ...)
 {
   va_list args;
   va_start(args, format);
-
+  printf("%s:%d", file, line);
+  printf(" [%s]: ", device_convert_log_level_to_string(level));
   vprintf(format, args);
-
   va_end(args);
 }
 
@@ -53,11 +61,11 @@ void device_serial_send(const char* data, int size)
 {
   //Todo: Implement sending via Termial
 
-  device_print_debug("Data Stream : \r\n");
+  DEVICE_LOG_INFO("Data Stream : \r\n");
   for (int i = 0; i < size; ++i) {
-    device_print_debug("%hhX ", data[i]);
+    printf("%hhX ", data[i]);
   }
-  device_print_debug("\r\n");
+  printf("\r\n");
 }
 
 #endif
