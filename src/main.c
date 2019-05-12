@@ -39,6 +39,7 @@ int main() {
 
   unsigned char frameDataBuffer[100];
   common_string frame = {
+      .maxSize = 100,
       .data = frameDataBuffer
   };
 

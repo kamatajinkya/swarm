@@ -11,8 +11,8 @@
 //Todo: Implement checks for overflow
 typedef struct{
   int size;
-  int maxSize;
-  unsigned char* data;
+  const int maxSize;
+  unsigned char* const data;
 }common_string;
 
 /// Used to supress unused warning for intentionally unused variables
