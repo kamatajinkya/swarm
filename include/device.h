@@ -32,11 +32,14 @@ typedef enum{
 /// Prints debug statement to console. Do not use this function use the macros DEVICE_LOG_ERROR()
 /// or DEVICE_LOG_INFO()
 /// \param[in] format message to be printed in printf like format
-void device_print_debug(device_log_level level , const char* file, int line, const char* format, ...);
-#define DEVICE_LOG_ERROR(...) device_print_debug(DEVICE_LOG_LEVEL_ERROR, \
-                                               __FILE__,__LINE__,           \
+void device_print_debug(device_log_level level,
+                        const char* file,
+                        int line,
+                        const char* format, ...);
+#define DEVICE_LOG_ERROR(...) device_print_debug(DEVICE_LOG_LEVEL_ERROR,   \
+                                               __FILE__,__LINE__,          \
                                                __VA_ARGS__);
-#define DEVICE_LOG_INFO(...) device_print_debug(DEVICE_LOG_LEVEL_INFO,   \
+#define DEVICE_LOG_INFO(...) device_print_debug(DEVICE_LOG_LEVEL_INFO,      \
                                                __FILE__,__LINE__,           \
                                                __VA_ARGS__);
 

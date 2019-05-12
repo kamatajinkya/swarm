@@ -38,8 +38,8 @@ xbee_init_status xbee_init(xbee_init_config config)
   mod.config = config;
   for (int i = 0; i < XBEE_STORED_ADDR_LIST_SIZE; i++) {
     common_set_char_array_to_zero(mod.addressList[i].destinationMacID, XBEE_MAC_ID_SIZE);
-    common_set_char_array_to_zero(mod.addressList[i].destinationNetworkAddr, XBEE_NETWORK_ADDR_SIZE);
-
+    common_set_char_array_to_zero(mod.addressList[i].destinationNetworkAddr,
+                                  XBEE_NETWORK_ADDR_SIZE);
   }
   return XBEE_INIT_SUCCESSFUL;
 }
@@ -50,7 +50,8 @@ bool xbee_get_network_addr_from_mac_id(const unsigned char* macID,
   int i;
   for (i = 0; i < XBEE_STORED_ADDR_LIST_SIZE; i++)
   {
-    if(common_compare_char_arrays(macID, mod.addressList[i].destinationMacID, XBEE_NETWORK_ADDR_SIZE))
+    if(common_compare_char_arrays(macID, mod.addressList[i].destinationMacID,
+                                  XBEE_NETWORK_ADDR_SIZE))
     {
       common_copy_char_array(mod.addressList[i].destinationNetworkAddr,
                              networkAddress,

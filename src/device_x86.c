@@ -44,7 +44,10 @@ static char* device_convert_log_level_to_string(device_log_level level)
   if(level == DEVICE_LOG_LEVEL_INFO) return "INFO";
 }
 
-void device_print_debug(device_log_level level , const char* file, int line, const char* format, ...)
+void device_print_debug(device_log_level level,
+                        const char* file,
+                        int line,
+                        const char* format, ...)
 {
   va_list args;
   va_start(args, format);

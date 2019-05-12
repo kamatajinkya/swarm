@@ -15,10 +15,10 @@ int main() {
     return -1;
   }
 
-  xbee_init_config xbeeInitConfig =
-      {.options = XBEE_API_OPTIONS_DISABLE_RETRIES,
-          .broadcastRadius = 0,
-          .apiFrameFormat = XBEE_API_FRAME_FORMAT_WITHOUT_ESCAPE_CHARACTERS};
+  xbee_init_config xbeeInitConfig = {
+      .options = XBEE_API_OPTIONS_DISABLE_RETRIES,
+      .broadcastRadius = 0,
+      .apiFrameFormat = XBEE_API_FRAME_FORMAT_WITHOUT_ESCAPE_CHARACTERS};
 
   xbee_init_status xbeeInitStatus = xbee_init(xbeeInitConfig);
   if (xbeeInitStatus != XBEE_INIT_SUCCESSFUL) {
@@ -29,8 +29,8 @@ int main() {
 
   xbee_mac_id_network_addr_pair device = {
       .destinationNetworkAddr = {0xFF, 0xFE},
-      .destinationMacID = {0x00, 0x13, 0xA2, 0x00, 0x40, 0xA2, 0x09, 0xA3}
-  };
+      .destinationMacID = {0x00, 0x13, 0xA2, 0x00, 0x40, 0xA2, 0x09, 0xA3}};
+
   int deviceIndex;
   xbee_add_network_addr_from_mac_pair(device, &deviceIndex);
 
