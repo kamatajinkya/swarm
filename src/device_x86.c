@@ -13,9 +13,9 @@
 #include "common.h"
 
 
-device_init_status device_init(unsigned long baudrate)
+device_init_status device_init(device_init_config config)
 {
-  UNUSED(baudrate);
+  UNUSED(config.baudrate);
   return DEVICE_INIT_SUCCESSFUL;
 }
 

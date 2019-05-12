@@ -6,13 +6,16 @@
 #ifndef SWARM_DEVICE_H
 #define SWARM_DEVICE_H
 
+typedef struct{
+  unsigned long baudrate;
+}device_init_config;
 typedef enum{
   DEVICE_INIT_WRONG_BAUDRATE = -1,
   DEVICE_INIT_SUCCESSFUL = 1
 }device_init_status;
 /// Initializes device ei configures pins, setup uart etc returns status
 /// \param[in] baudrate Baudrate in numbers for example 9600, 115200.
-device_init_status device_init(unsigned long baudrate);
+device_init_status device_init(device_init_config config);
 
 /// Halts thread/process for a few milliseconds
 /// \param[in] timeInMilliseconds time for which process should halt

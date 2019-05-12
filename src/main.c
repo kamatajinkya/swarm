@@ -9,7 +9,10 @@
 
 int main() {
 
-  device_init_status deviceInitStatus = device_init(9600);
+  device_init_config deviceInitConfig = {
+      .baudrate = 9600
+  };
+  device_init_status deviceInitStatus = device_init(deviceInitConfig);
   if (deviceInitStatus != DEVICE_INIT_SUCCESSFUL) {
     DEVICE_LOG_ERROR("Device Init Failed with code : %d", deviceInitStatus);
     return -1;
