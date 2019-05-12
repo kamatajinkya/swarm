@@ -33,8 +33,6 @@ int main() {
   int size;
 
   device_status deviceStatus;
-  /* Weird but valid syntax warning. Device status is stored in deviceStatus and then
-   * checked if it is DEVICE_STATUS_OK */
   while (1) {
     deviceStatus = device_get_status();
     if (deviceStatus != DEVICE_STATUS_OK) {
