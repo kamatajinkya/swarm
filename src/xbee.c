@@ -20,6 +20,7 @@
 #define XBEE_TRANSMIT_REQUEST_FRAME_HEADER_SIZE 17
 #define XBEE_TRANSMIT_REQUEST_FRAME_HEADER_DELIIMITER_SIZE 1
 #define XBEE_TRANSMIT_REQUEST_FRAME_HEADER_LENGTH_SIZE 2
+#define XBEE_TRANSMIT_REQUEST_CHECKSUM_SIZE 1
 #define XBEE_DELIMITER 0x7E
 typedef struct {
   unsigned char delimiter;
@@ -117,6 +118,10 @@ xbee_create_transmit_request(const unsigned char destinationMacID[XBEE_MAC_ID_SI
                              const common_string payload,
                              common_string* frame, unsigned char* frameId)
 {
+  if(frame->maxSize < (XBEE_TRANSMIT_REQUEST_FRAME_HEADER_SIZE
+                      + payload.size
+                      + XBEE_TRANSMIT_REQUEST_CHECKSUM_SIZE))
+    return XBEE_CREATE_TRANMIT_REQUEST_PAYLOAD_TOO_LONG;
   /* Weird but valid syntax warning. Casting char array as a xbee_transmit_request_frame_header
    * structure to make assembling the frame easier */
   xbee_transmit_request_frame_header* formattedMsg =
@@ -148,10 +153,12 @@ xbee_create_transmit_request(const unsigned char destinationMacID[XBEE_MAC_ID_SI
     return XBEE_CREATE_TRANMIT_REQUEST_COULD_NOT_FIND_NETWORK_ID;
   }
 
-  common_copy_char_array(payload.data, (frame->data + XBEE_TRANSMIT_REQUEST_FRAME_HEADER_SIZE), payload.size);
+  common_copy_char_array(payload.data,
+      (frame->data + XBEE_TRANSMIT_REQUEST_FRAME_HEADER_SIZE), payload.size);
   frame->data[XBEE_TRANSMIT_REQUEST_FRAME_HEADER_SIZE + payload.size]
       = xbee_calculate_checksum(&formattedMsg->apiFrameFormat, length);
-  frame->size = XBEE_TRANSMIT_REQUEST_FRAME_HEADER_SIZE + payload.size + 1;
+  frame->size = XBEE_TRANSMIT_REQUEST_FRAME_HEADER_SIZE
+      + payload.size + XBEE_TRANSMIT_REQUEST_CHECKSUM_SIZE;
 
   return XBEE_CREATE_TRANMIT_REQUEST_SUCCESSFUL;
 }
