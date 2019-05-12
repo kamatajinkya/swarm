@@ -60,17 +60,17 @@ void device_print_debug(device_log_level level,
 void device_convert_number_to_bigendien(const char* in, long sizeInBytes, char* out)
 {
   //x86 is little endien
-  for (int i = 0; i < sizeInBytes; ++i) {
-    out[i] = in[sizeInBytes - i];
+  for (int i = 0; i < sizeInBytes; i++) {
+    out[i] = in[sizeInBytes - i - 1];
   }
 }
 
 #ifdef DEVICE_TEST_MODE
-void device_serial_send(const char* data, int size)
+void device_serial_send(const common_string data)
 {
   DEVICE_LOG_INFO("Data Stream : \r\n");
-  for (int i = 0; i < size; ++i) {
-    printf("%hhX ", data[i]);
+  for (int i = 0; i < data.size; ++i) {
+    printf("0x%hhX ", data.data[i]);
   }
   printf("\r\n");
 }

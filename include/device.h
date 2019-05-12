@@ -6,6 +6,8 @@
 #ifndef SWARM_DEVICE_H
 #define SWARM_DEVICE_H
 
+#include "common.h"
+
 typedef struct{
   unsigned long baudrate;
 }device_init_config;
@@ -54,7 +56,6 @@ void device_convert_number_to_bigendien(const char* in, long sizeInBytes, char* 
 
 /// Sends data via serial port
 /// \param[in] data Data to be sent
-/// \param[in] size Size of array of data
-void device_serial_send(const char* data, int size);
+void device_serial_send(const common_string data);
 
 #endif //SWARM_DEVICE_H

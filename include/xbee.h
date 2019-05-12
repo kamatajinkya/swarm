@@ -7,6 +7,7 @@
 #define SWARM_XBEE_H
 
 #include <stdbool.h>
+#include "common.h"
 
 #define XBEE_MAC_ID_SIZE 8
 #define XBEE_NETWORK_ADDR_SIZE 2
@@ -42,11 +43,11 @@ typedef enum{
 /// \param[IN] destinationMacID Hardware address for
 /// \param[IN] payload Contains actual message to be sent
 /// \param[out] frame contains the formated frame that can be sent to xbee
-/// \param[out] size size of frame
+/// \param[out] frameId frameId of the sent payload for future reference
 xbee_create_transmit_request_status
 xbee_create_transmit_request(const unsigned char destinationMacID[XBEE_MAC_ID_SIZE],
-                             const unsigned char* payload,
-                             unsigned char* frame, int* size);
+                             const common_string payload,
+                             common_string* frame, unsigned char* frameId);
 
 /// Retrives network ID from mac id. Returns false if address is not stored
 /// \param[IN] macID Machine Address of Xbee

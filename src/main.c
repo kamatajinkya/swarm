@@ -21,8 +21,7 @@ int main() {
   xbee_init_config xbeeInitConfig = {
       .options = XBEE_API_OPTIONS_DISABLE_RETRIES,
       .broadcastRadius = 0,
-      .apiFrameFormat = XBEE_API_FRAME_FORMAT_WITHOUT_ESCAPE_CHARACTERS};
-
+      .apiFrameFormat = XBEE_API_FRAME_FORMAT_WITH_ESCAPE_CHARACTERS};
   xbee_init_status xbeeInitStatus = xbee_init(xbeeInitConfig);
   if (xbeeInitStatus != XBEE_INIT_SUCCESSFUL) {
     DEVICE_LOG_ERROR("Xbee Init Failed with code : %d", xbeeInitStatus);
@@ -38,8 +37,19 @@ int main() {
   int deviceIndex;
   xbee_add_network_addr_mac_id_pair(xbee, &deviceIndex);
 
-  unsigned char frame[500];
-  int size;
+  unsigned char frameDataBuffer[100];
+  common_string frame = {
+      .data = frameDataBuffer
+  };
+
+  unsigned char payloadDataBuffer[150] = {"Hello World!!!"};
+  common_string payload = {
+      .size = 14,
+      .maxSize = 150,
+      .data = payloadDataBuffer
+  };
+
+  unsigned char frameId;
 
   device_status deviceStatus;
   while (1) {
@@ -50,14 +60,15 @@ int main() {
     }
 
     xbee_create_transmit_request_status createTransmitRequestStatus
-        = xbee_create_transmit_request(xbee.destinationMacID, "Hello World!!!", frame, &size);
+        = xbee_create_transmit_request(xbee.destinationMacID, payload, &frame, &frameId);
 
     if (createTransmitRequestStatus != XBEE_CREATE_TRANMIT_REQUEST_SUCCESSFUL) {
       DEVICE_LOG_ERROR("Could not create transmit request", deviceStatus);
       return -1;
     }
 
-    device_serial_send(frame, size);
+    device_serial_send(frame);
+    device_sleep_ms(1000);
 
   }
 

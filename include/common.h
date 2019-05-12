@@ -8,6 +8,13 @@
 #define SWARM_COMMON_H
 #include <stdbool.h>
 
+//Todo: Implement checks for overflow
+typedef struct{
+  int size;
+  int maxSize;
+  unsigned char* data;
+}common_string;
+
 /// Used to supress unused warning for intentionally unused variables
 #define UNUSED(x) (void)(x)
 
