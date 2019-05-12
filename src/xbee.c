@@ -9,10 +9,14 @@
 #include "device.h"
 #include "common.h"
 
-#define XBEE_
 
-/* Caution do not modify the header without modifying the macro for size*/
-//Todo: Deal with struct packing
+/* Caution do not modify the xbee_transmit_request_frame_header
+ * without modifying the macros for size. Only use chars to make sure
+ * we do not mess up the alignment of the struct. Standard C does not have
+ * bit field pointers. We can use different datatypes such as uint16, int32
+ * if we use non standard compilers like TI's compiler. But we are writing this
+ * as a cross platform code. So, just use chars
+ */
 #define XBEE_TRANSMIT_REQUEST_FRAME_HEADER_SIZE 17
 #define XBEE_TRANSMIT_REQUEST_FRAME_HEADER_DELIIMITER_SIZE 1
 #define XBEE_TRANSMIT_REQUEST_FRAME_HEADER_LENGTH_SIZE 2
