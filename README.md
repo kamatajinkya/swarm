@@ -1,4 +1,8 @@
 # swarm
+
+For IVLabs, VNIT project "Swarm Communication".\
+This is intended to be a cross platform implementation for sending and recieving data using [Xbee].
+
 ## Instructions
 
 The repo was tested on Ubuntu 16.04
@@ -21,3 +25,4 @@ make
 ```bash
 ./swarm
 ```
+[Xbee]:https://www.digi.com/xbee
